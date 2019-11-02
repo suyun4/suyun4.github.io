@@ -83,19 +83,13 @@
   const updateCounter = i => {};
   const renderResults = () => {
     const resultEl = document.querySelector("#results");
-    let newHTML = "";
-    todos.forEach((result, i) => (newHTML += makeResultHTML(result, i)));
+    let newHTML = "<table;
+    results.forEach((result, i) => (newHTML += makeResultHTML(result, i)));
     resultEl.innerHTML = newHTML;
   };
 
   const makeResultHTML = () =>
-    `<div class="todo-item" id="todo-item-${i}" style="border:thin dotted ${deadlineColor}">` +
-    `<div><input type="checkbox" ${
-      isChecked ? "checked" : ""
-    } data-todo-item-checkbox-index="${i}" />${message}</div>` +
-    `<div class="btn btn-info" data-todo-item-update-index="${i}">update</div>` +
-    `<div class="btn btn-danger" data-todo-item-delete-index="${i}">delete</div>` +
-    `</div>`;
+    `<div class="result-item" style="border:thin dotted black">` +;
 
   //    -----Event Listeners------
   window.addEventListener("load", () => {
