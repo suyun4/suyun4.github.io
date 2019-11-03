@@ -82,9 +82,8 @@
     };
     results.push(newResult);
   };
-
   const renderResultsTable = () => {
-    const resultEl = document.querySelector("#results");
+    const resultEl = document.querySelector("#table-results");
     let newHTML =
       `<table class = "table"><tr>
         <th class = "first-column">#</th><th class = "second-column">Winning Door</th>
@@ -108,8 +107,13 @@
       <td>${correctForStaying ? "Correct" : "Incorrect"}</td>
     </tr>`;
 
-  const renderTotalResults = totalResults => {
-    return totalResults;
+  const renderTotalResults = (sims, doors, results) => {
+    const resultEl = document.querySelector("#summary-paragraph");
+    let newHTML = `${sims} iterations of simulation completed for ${doors} doors. `
+    + `${results[0]}/${sims} (${(results[0]/sims*100).toFixed(2)}%) correct for switching. `
+    + `${results[1]}/${sims} (${(results[1]/sims*100).toFixed(2)}%) correct for staying. `
+    + `${results[0] > results[1] ? "Switching wins!" : "Staying wins!"}`;
+    resultEl.innerHTML = newHTML;
   };
   //    -----Event Listeners------
   window.addEventListener("load", () => {
@@ -117,14 +121,11 @@
 
     simulationFormElement.addEventListener("submit", e => {
       e.preventDefault();
-      console.log("submitted");
       const numberSimulations = Number(document.querySelector("#num-of-simulations").value);
       const numberDoors = Number(document.querySelector("#num-of-doors").value);
-      console.log (numberSimulations + "  "  + numberDoors);
       const totalResults = runSimulation(numberSimulations, numberDoors);
       renderResultsTable();
-      renderTotalResults(totalResults);
-      console.log(totalResults);
+      renderTotalResults(numberSimulations, numberDoors, totalResults);
     });
   });
 })();

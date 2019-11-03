@@ -20,7 +20,7 @@ p {
     margin: auto;
 }
 
-#results{
+#table-results{
     width: 100%;
     overflow-x: auto;
 }
