@@ -12,15 +12,18 @@
   // };
 
   const renderIntro = () => {
-    const introEl = document.querySelector("#mh-explanation");
-    introEl.innerHTML = "The Monty Hall Problem :";
+    const introEl = document.querySelector("#paragraph");
+    introEl.innerHTML = "The Monty Hall problem is an interesting statistical paradox based on the American TV game show, Let's make a Deal. "
+    + "The game show host would ask a contestant to choose 1 out of 3 doors, two doors which hid a goat each, and one that revealed a new car. "
+    + "The host will then reveal a door that the contestant did not pick and had a goat behind it, and then ask the contestant if they would like to switch their choice. "
+    + "Although many would say all doors had an equal chance to lead to the prize of a car, statisticians found that this was not the case. "
+    + "This site will simulate many times the outcomes to help show that switching is a more favorable choice than staying on an initial decision.";
   };
 
   const runSimulation = (sims, doors) => {
     results = [];
     let correctForSwitchingCount = 0;
     let correctForStayingCount = 0;
-    updateCounter(0);
 
     for (let i = 1; i <= sims; i++) {
       const correctDoor = Math.floor(Math.random() * doors);
@@ -57,7 +60,6 @@
           correctForStaying
         );
       }
-      updateCounter(i);
     }
     return [correctForSwitchingCount, correctForStayingCount];
   };
@@ -81,21 +83,30 @@
     results.push(newResult);
   };
 
-  const updateCounter = i => {return i};
   const renderResultsTable = () => {
     const resultEl = document.querySelector("#results");
     let newHTML =
-      "<table><tr><th>#</th><th>Winning Door</th><th>Initially Guessed Door</th><th>Revealed Door</th><th>Secondly Guessed Door</th><th>correctForSwitching Result</th><th>correctForStaying Result</th></tr>";
+      `<table class = "table"><tr>
+        <th class = "first-column">#</th><th class = "second-column">Winning Door</th>
+        <th>Initial Guess</th>
+        <th>Revealed Door</th>
+        <th>Second Guess</th>
+        <th>Switch Result</th>
+        <th>Stay Result</th>
+      </tr>`;
     results.forEach((result, i) => (newHTML += makeResultTableHTML(result, i)));
     newHTML += "</table>";
     resultEl.innerHTML = newHTML;
   };
 
-  const makeResultTableHTML = ({winningDoor, initGuessDoor, revealedDoor, correctForSwitchingDoor, e: correctForSwitching, correctForStaying} , i) =>
-    `<tr><th>${i +
-      1}</th><th>${winningDoor}</th><th>${initGuessDoor}</th><th>${revealedDoor}</th><th>${correctForSwitchingDoor}</th><th>${
-      correctForSwitching ? "Correct" : "False"
-    }</th><th>${correctForStaying ? "Correct" : "False"}</th></tr>`;
+  const makeResultTableHTML = ({winningDoor, initGuessDoor, revealedDoor, correctForSwitchingDoor, correctForSwitching, correctForStaying} , i) =>
+    `<tr><td class = "first-column">${i + 1}</td>
+      <td class = "second-column">${winningDoor}</td>
+      <td>${initGuessDoor}</td><td>${revealedDoor}</td>
+      <td>${correctForSwitchingDoor}</td>
+      <td>${correctForSwitching ? "Correct" : "Incorrect"}</td>
+      <td>${correctForStaying ? "Correct" : "Incorrect"}</td>
+    </tr>`;
 
   const renderTotalResults = totalResults => {
     return totalResults;

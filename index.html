@@ -10,10 +10,11 @@
   </head>
 
   <body>
+    <div class = "container">
     <header>
-      Monty Hall Problem Simulator
+      <h1>Monty Hall Problem Simulator</h1>
     </header>
-    <div id="mh-explanation"></div>
+    <div id = "mh-explanation"><p id = "paragraph"></p></div>
     <form id="simulation-form">
       <label for="num-of-simulations">How many simulations?</label>
       <select id="num-of-simulations">
@@ -33,8 +34,8 @@
       </select>
       <input type="submit" value="Start" />
     </form>
-    <div id="counter"></div>
     <div id="results"></div>
-    <script src="index.js"></script>
-  </body>
+  </div>
+  <script src="index.js"></script>
+</body>
 </html>
