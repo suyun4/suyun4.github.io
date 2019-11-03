@@ -1,8 +1,6 @@
 (function() {
   const simulationFormElement = document.querySelector("#simulation-form");
-  const numberSimulations = document.querySelector("#num-of-simulations");
-  const numberDoors = document.querySelector("num-of-doors");
-  const showIntro = true;
+  let results = [];
 
   const storeShowIntro = () =>
     localStorage.setItem("showIntro", JSON.stringify(showIntro));
@@ -19,15 +17,14 @@
   };
 
   const runSimulation = (sims, doors) => {
+    console.log(sims + " " + doors);
     let correctForSwitching = 0;
     let correctForStaying = 0;
-    let switched = false;
-    let stayed = false;
     updateCounter(0);
 
     for (let i = 1; i <= sims; i++) {
-      let correctDoor = Math.floor(Math.random() * doors) + 1;
-      let chosenDoor = Math.floor(Math.random() * doors) + 1;
+      const correctDoor = Math.floor(Math.random() * doors);
+      const chosenDoor = Math.floor(Math.random() * doors);
       let shownDoor = chosenDoor;
       while (shownDoor == chosenDoor || shownDoor == correctDoor) {
         shownDoor = Math.floor(Math.random() * doors);
@@ -35,17 +32,18 @@
       // For Staying
       if (shownDoor == correctDoor) {
         correctForStaying++;
-        stayed = true;
-      }
+        const stayed = true;
+      } else const stayed = false;
       // For Switching
       let switchDoor = chosenDoor;
       while (switchDoor == chosenDoor || switchDoor == shownDoor) {
-        switchDoor = Math.floor(Math.random() * doors) + 1;
+        switchDoor = Math.floor(Math.random() * doors);
       }
       if (switchDoor == correctDoor) {
         correctforSwitching++;
-        switched = true;
-      }
+        const switched = true;
+      } else const switched = false;
+
       if (i < 100) {
         addResult(
           correctDoor,
@@ -81,26 +79,37 @@
   };
 
   const updateCounter = i => {};
-  const renderResults = () => {
+  const renderResultsTable = () => {
     const resultEl = document.querySelector("#results");
-    let newHTML = "<table;
-    results.forEach((result, i) => (newHTML += makeResultHTML(result, i)));
+    let newHTML =
+      "<table><tr><th>#</th><th>Winning Door</th><th>Initially Guessed Door</th><th>Revealed Door</th><th>Secondly Guessed Door</th><th>Switched Result</th><th>Stayed Result</th></tr>";
+    results.forEach((result, i) => (newHTML += makeResultTableHTML(result, i)));
+    newHTML += "</table>";
     resultEl.innerHTML = newHTML;
   };
 
-  const makeResultHTML = () =>
-    `<div class="result-item" style="border:thin dotted black">` +;
+  const makeResultTableHTML = ({ a, b, c, d, e, f }, i) =>
+    `<tr><th>${i +
+      1}</th><th>${a}</th><th>${b}</th><th>${c}</th><th>${d}</th><th>${
+      e ? "Correct" : "false"
+    }</th><th>${f ? "Correct" : "false"}</th></tr>`;
 
+  const renderTotalResults = totalResults => {
+    return totalResults;
+  };
   //    -----Event Listeners------
   window.addEventListener("load", () => {
-    if (showIntro) renderIntro();
-    console.log("loaded");
-  });
+    renderIntro();
 
-  simulationFormElement.addEventListener("submit", e => {
-    e.preventDefault();
-    totalResults = runSimulation(numberSimulations, numberDoors);
-    //renderResults(totalResults);
-    console.log(totalResults);
+    simulationFormElement.addEventListener("submit", e => {
+      e.preventDefault();
+      console.log("submitted");
+      const numberSimulations = Number(document.querySelector("#num-of-simulations"));
+      const numberDoors = Number(document.querySelector("num-of-doors"));
+      totalResults = runSimulation(numberSimulations, numberDoors);
+      renderResultsTable();
+      renderTotalResults(totalResults);
+      console.log(totalResults);
+    });
   });
-});
+})();
