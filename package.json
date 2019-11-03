@@ -1,0 +1,22 @@
+{
+  "name": "suyun4.github.io",
+  "version": "1.0.0",
+  "description": "Monty Hall Problem",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/suyun4/suyun4.github.io.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/suyun4/suyun4.github.io/issues"
+  },
+  "homepage": "https://github.com/suyun4/suyun4.github.io#readme",
+  "dependencies": {
+    "eslint": "^6.6.0"
+  }
+}
