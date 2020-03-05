@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" type="text/css" href="index.css" />
+
+    <title>Monty Hall Problem Simulator</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Trade+Winds&display=swap" rel="stylesheet">
+  </head>
+
+  <body>
+    <div class = "container">
+    <header class="fade-in-animation">
+      <h1>Monty Hall Problem Simulator</h1>
+    </header>
+    <div id = "mh-explanation"><p id = "paragraph">
+      The Monty Hall problem is an interesting statistical paradox based on the American TV game show, Let's make a Deal. 
+      The game show host would ask a contestant to choose 1 out of 3 doors, two doors which hid a goat each, and one that revealed a new car. 
+      The host will then reveal a door that the contestant did not pick and had a goat behind it, and then ask the contestant if they would like to switch their choice. 
+      Although many would say all doors had an equal chance to lead to the prize of a car, statisticians found that this was not the case. 
+      This site will simulate many times the outcomes to help show that switching is a more favorable choice than staying on an initial decision
+    </p></div>
+    <form id="simulation-form">
+    <div class = "centered-form-content">
+      <label for="num-of-simulations">How many simulations?</label>
+      <select id="num-of-simulations">
+        <option>10</option>
+        <option>100</option>
+        <option selected = "selected">1000</option>
+        <option>100000</option>
+        <option>1000000</option>
+        <option>10000000</option>
+      </select>
+    </div>
+    <div class = "centered-form-content">
+      <label for="num-of-doors">How many doors?</label>
+        <select id="num-of-doors">
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="10">10</option>
+        </select>
+    </div>
+    <div class = "centered-form-content">
+      <input type="submit" class = "big-button" value="START">
+    </div>
+    </form>
+    <div class ="space"></div>
+    <div id="summary-result"></div>
+    <p id="summary-paragraph"></p>
+    <div id="table-results"></div>
+
+    <div class="test-container">
+      <div class="test">
+        <div class="test-inner">
+          TEST
+        </div>
+        <div class="test-pointer"></div>
+        <div class="test-pointer"></div>
+        <div class="test-pointer"></div>
+      </div>
+    </div>
+
+    <button id="flash-circle-button">
+      Flash the circle!
+    </button>
+    <svg viewBox="0 0 100 100">
+      <circle id="svg-animated" class="fade-in-animation" cx="50" cy="50" r="30" stroke="var(--color-primary-800)" stroke-width="0.5" fill="var(--color-primary-900)"></circle>
+    </svg>
+  <script src="index.js"></script>
+</body>
+</html>
