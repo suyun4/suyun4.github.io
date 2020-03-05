@@ -11,16 +11,6 @@
   //   }
   // };
 
-  const renderIntro = () => {
-    const introEl = document.querySelector("#paragraph");
-    introEl.innerHTML =
-      "The Monty Hall problem is an interesting statistical paradox based on the American TV game show, Let's make a Deal. " +
-      "The game show host would ask a contestant to choose 1 out of 3 doors, two doors which hid a goat each, and one that revealed a new car. " +
-      "The host will then reveal a door that the contestant did not pick and had a goat behind it, and then ask the contestant if they would like to switch their choice. " +
-      "Although many would say all doors had an equal chance to lead to the prize of a car, statisticians found that this was not the case. " +
-      "This site will simulate many times the outcomes to help show that switching is a more favorable choice than staying on an initial decision.";
-  };
-
   const runSimulation = (sims, doors) => {
     results = [];
     let correctForSwitchingCount = 0;
@@ -144,8 +134,6 @@
 
   //    -----Event Listeners------
   window.addEventListener("load", () => {
-    renderIntro();
-
     simulationFormElement.addEventListener("submit", e => {
       e.preventDefault();
       const numberSimulations = Number(
@@ -157,3 +145,19 @@
     });
   });
 })();
+
+window.onload = () => {
+  const svg = document.querySelector("#svg-animated");
+
+  document
+    .querySelector("#flash-circle-button")
+    .addEventListener("click", () => {
+      window.requestAnimationFrame(() => {
+        svg.classList.remove("fade-in-animation");
+
+        window.requestAnimationFrame(() => {
+          svg.classList.add("fade-in-animation");
+        });
+      });
+    });
+};
